@@ -33,17 +33,19 @@ stdenv.mkDerivation {
     openssl_3
   ];
 
-  buildPhase = ''
-    set -e
-    
-    cp ${asn1crypto} calibre-plugin/asn1crypto.zip
-    cp ${oscrypto} calibre-plugin/oscrypto.zip
+  buildPhase =
+    # sh
+    ''
+      set -e
 
-    substituteInPlace ./calibre-plugin/__init__.py \
-        --replace-fail "libcrypto_path = os.getenv(\"ACSM_LIBCRYPTO\", None)" "libcrypto_path = \"${openssl_3.out}/lib/libcrypto.so\"" \
-        --replace-fail "libssl_path = os.getenv(\"ACSM_LIBSSL\", None)" "libssl_path = \"${openssl_3.out}/lib/libssl.so\""
+      cp ${asn1crypto} calibre-plugin/asn1crypto.zip
+      cp ${oscrypto} calibre-plugin/oscrypto.zip
 
-    bash ./bundle_calibre_plugin.sh
-    cp calibre-plugin.zip $out
-  '';
+      substituteInPlace ./calibre-plugin/__init__.py \
+          --replace-fail 'libcrypto_path = os.getenv("ACSM_LIBCRYPTO", None)' 'libcrypto_path = os.getenv("ACSM_LIBCRYPTO", "${openssl_3.out}/lib/libcrypto.so")' \
+          --replace-fail 'libssl_path = os.getenv("ACSM_LIBSSL", None)' 'libssl_path = os.getenv("ACSM_LIBSSL", "${openssl_3.out}/lib/libssl.so")'
+
+      bash ./bundle_calibre_plugin.sh
+      cp calibre-plugin.zip $out
+    '';
 }
