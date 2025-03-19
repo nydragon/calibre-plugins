@@ -7,7 +7,7 @@
   ...
 }:
 stdenv.mkDerivation {
-  name = "dedrmu-plugin";
+  name = "dedrm-plugin";
 
   src = fetchFromGitHub {
     owner = "noDRM";
