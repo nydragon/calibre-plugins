@@ -15,6 +15,7 @@
     {
       packages = forEachSystem (system: {
         acsm-calibre-plugin = pkgsForEach.${system}.callPackage ./packages/acsm-calibre-plugin { };
+        dedrm-plugin = pkgsForEach.${system}.callPackage ./packages/dedrm-plugin { };
       });
     };
 }
