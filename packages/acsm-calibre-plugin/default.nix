@@ -9,12 +9,12 @@
 }:
 let
   oscrypto = fetchurl {
-    url = "https://github.com/Leseratte10/acsm-calibre-plugin/releases/download/config/oscrypto_1.3.0_fork_2023-12-19.zip";
-    hash = "sha256-D872/kQemxB2D7yUSuCIreAMGJOc9V7PtVommZPlwxc=";
+    url = "https://github.com/wbond/oscrypto/archive/refs/tags/1.3.0.zip";
+    hash = "sha256-oUpDnTLkaNpoWRFx+R4yFTeUKjGdriB+C6cHHzd/P80=";
   };
   asn1crypto = fetchurl {
-    url = "https://github.com/Leseratte10/acsm-calibre-plugin/releases/download/config/asn1crypto_1.5.1.zip";
-    hash = "sha256-f0Wtf5qLAtuPqQ80uOfWtV4grf5CChRL3fcjkMSmEFA=";
+    url = "https://github.com/wbond/asn1crypto/archive/refs/tags/1.5.1.zip";
+    hash = "sha256-5H8BLisxlT4Wk/MOiJtI8yjHgy3B5hgufiScmC6YGjU=";
   };
 in
 stdenv.mkDerivation {
