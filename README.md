@@ -24,9 +24,9 @@ hjem.users.<username>.files = {
 #### Home-manager
 
 ```nix
-home.file = {
-    ".config/calibre/plugins/ACSM Input.zip".source = inputs.calibre-plugins.packages.${pkgs.system}.acsm-calibre-plugin;
-    ".config/calibre/plugins/DeDRM.zip".source = inputs.calibre-plugins.packages.${pkgs.system}.dedrm-plugin;
+xdg.configFile = {
+    "calibre/plugins/ACSM Input.zip".source = inputs.calibre-plugins.packages.${pkgs.system}.acsm-calibre-plugin;
+    "calibre/plugins/DeDRM.zip".source = inputs.calibre-plugins.packages.${pkgs.system}.dedrm-plugin;
 }
 ```
 
