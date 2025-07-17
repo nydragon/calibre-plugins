@@ -5,17 +5,16 @@
     nixpkgs.url = "github:nixos/nixpkgs";
   };
 
-  outputs =
-    { self, nixpkgs }:
-    let
-      systems = [ "x86_64-linux" ];
-      forEachSystem = nixpkgs.lib.genAttrs systems;
-      pkgsForEach = nixpkgs.legacyPackages;
-    in
-    {
-      packages = forEachSystem (system: {
-        acsm-calibre-plugin = pkgsForEach.${system}.callPackage ./packages/acsm-calibre-plugin { };
-        dedrm-plugin = pkgsForEach.${system}.callPackage ./packages/dedrm-plugin { };
-      });
-    };
+  outputs = {nixpkgs, ...}: let
+    supportedSystems = ["x86_64-linux"];
+    forAllSystems = function:
+      nixpkgs.lib.genAttrs
+      supportedSystems
+      (system: function nixpkgs.legacyPackages.${system});
+  in {
+    packages = forAllSystems (pkgs: {
+      acsm-calibre-plugin = pkgs.callPackage ./packages/acsm-calibre-plugin {};
+      dedrm-plugin = pkgs.callPackage ./packages/dedrm-plugin {};
+    });
+  };
 }
